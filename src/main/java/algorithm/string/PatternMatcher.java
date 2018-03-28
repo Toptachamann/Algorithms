@@ -1,13 +1,14 @@
-package string.matching;
+package algorithm.string;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class StringMatcher {
+public class PatternMatcher {
 
   static ArrayList<Integer> naive(String text, String pattern) {
     ArrayList<Integer> matched = new ArrayList<>();
@@ -108,6 +109,64 @@ public class StringMatcher {
     return matched;
   }
 
+  public static ArrayList<Integer> shiftAnd(String text, String pattern) {
+    Map<Character, BitSet> table = getShiftAndTable(getAlphabet(text, pattern), pattern);
+    ArrayList<Integer> matched = new ArrayList<>();
+    int m = pattern.length();
+    BitSet d = new BitSet(m);
+    for (int i = 0; i < text.length(); i++) {
+      d = d.get(1, m);
+      d.set(m - 1);
+      d.and(table.get(text.charAt(i)));
+      if (d.get(0)) {
+        matched.add(i - m + 1);
+      }
+    }
+    return matched;
+  }
+
+  public static ArrayList<Integer> shiftOr(String text, String pattern) {
+    ArrayList<Integer> matched = new ArrayList<>();
+    Map<Character, BitSet> table = getShiftOrTable(getAlphabet(text, pattern), pattern);
+    int m = pattern.length();
+    BitSet d = new BitSet(m);
+    d.set(0, m);
+    for (int i = 0; i < text.length(); i++) {
+      d = d.get(1, m);
+      d.or(table.get(text.charAt(i)));
+      if (!d.get(0)) {
+        matched.add(i - m + 1);
+      }
+    }
+    return matched;
+  }
+
+  private static Map<Character, BitSet> getShiftOrTable(Set<Character> alphabet, String pattern) {
+    Map<Character, BitSet> table = new HashMap<>();
+    int m = pattern.length();
+    for (Character c : alphabet) {
+      BitSet bitSet = new BitSet(m);
+      bitSet.set(0, m);
+      table.put(c, bitSet);
+    }
+    for (int i = 0; i < pattern.length(); i++) {
+      table.get(pattern.charAt(i)).clear(m - i - 1);
+    }
+    return table;
+  }
+
+  private static Map<Character, BitSet> getShiftAndTable(Set<Character> alphabet, String pattern) {
+    Map<Character, BitSet> table = new HashMap<>();
+    int m = pattern.length();
+    for (Character c : alphabet) {
+      table.put(c, new BitSet(m));
+    }
+    for (int i = 0; i < pattern.length(); i++) {
+      table.get(pattern.charAt(i)).set(m - i - 1);
+    }
+    return table;
+  }
+
   private static Set<Character> getAlphabet(String text, String pattern) {
     Set<Character> alphabet = new HashSet<>();
     for (int i = 0; i < text.length(); i++) {
@@ -130,4 +189,6 @@ public class StringMatcher {
     }
     return map;
   }
+
+
 }
