@@ -70,4 +70,15 @@ class PatternMatcherTest extends Specification {
     "abbaabbab" | "ab"    | [0, 4, 7]
     "GAGAVAGAV" | "GAV"   | [2, 6]
   }
+
+  @Unroll
+  def "test sunday"(){
+    def result = PatternMatcher.sunday(text, pattern)
+    expect:
+    result == ans
+    where:
+    text        | pattern | ans
+    "abbaabbab" | "ab"    | [0, 4, 7]
+    "GAGAVAGAV" | "GAV"   | [2, 6]
+  }
 }

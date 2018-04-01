@@ -1,13 +1,19 @@
 group 'com.chudakov.algorithms'
-version '1.0-SNAPSHOT'
+version '0.1.0'
 
 apply plugin: 'groovy'
 apply plugin: 'java'
 
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
+}
+
+jar {
+  baseName = project.name
+  version = project.version
 }
 
 dependencies {

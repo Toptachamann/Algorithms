@@ -60,16 +60,30 @@ public class PatternMatcher {
 
   public static ArrayList<Integer> quickSearch(String text, String pattern) {
     ArrayList<Integer> matched = new ArrayList<>();
-    Map<Character, Integer> badCharacter = badCharacter(getAlphabet(text, pattern), pattern);
+    Map<Character, Integer> badCharacter = quickSearchBadCharacter(getAlphabet(text, pattern), pattern);
+    int n = text.length();
     int m = pattern.length();
     for (int i = 0; i <= text.length() - pattern.length(); ) {
-      int j = m - 1;
-      for (; j >= 0; j--) {
-        if (pattern.charAt(j) != text.charAt(i + j)) {
-          break;
-        }
+      if (pattern.equals(text.substring(i, i + m))) {
+        matched.add(i);
       }
-      if (j == -1) {
+      if (i + m < n) {
+        i += badCharacter.get(text.charAt(i + m));
+      } else {
+        break;
+      }
+    }
+    return matched;
+  }
+
+  public static ArrayList<Integer> sunday(String text, String pattern) {
+    ArrayList<Integer> matched = new ArrayList<>();
+    Map<Character, Integer> badCharacter = badCharacter(getAlphabet(text, pattern), pattern);
+    int n = text.length();
+    int m = pattern.length();
+    int i = 0;
+    while (i < n - m + 1) {
+      if (pattern.equals(text.substring(i, i + m))) {
         matched.add(i);
       }
       i += badCharacter.get(text.charAt(i + m - 1));
@@ -90,18 +104,8 @@ public class PatternMatcher {
       while (k > 0) {
         i += k;
         k = badCharacter.get(text.charAt(i + m - 1));
-        i += k;
-        k = badCharacter.get(text.charAt(i + m - 1));
-        i += k;
-        k = badCharacter.get(text.charAt(i + m - 1));
       }
-      int j = 0;
-      for (; j < m; j++) {
-        if (pattern.charAt(j) != text.charAt(i + j)) {
-          break;
-        }
-      }
-      if (j == m) {
+      if (pattern.equals(text.substring(i, i + m))) {
         matched.add(i);
       }
       i += shift;
@@ -138,6 +142,11 @@ public class PatternMatcher {
         matched.add(i - m + 1);
       }
     }
+    return matched;
+  }
+
+  public static ArrayList<Integer> berryRanvingran(String text, String pattern){
+    ArrayList<Integer> matched = new ArrayList<>();
     return matched;
   }
 
@@ -186,6 +195,18 @@ public class PatternMatcher {
     }
     for (int i = 0; i < m - 1; i++) {
       map.put(pattern.charAt(i), m - i - 1);
+    }
+    return map;
+  }
+
+  private static Map<Character, Integer> quickSearchBadCharacter(Set<Character> alphabet, String pattern) {
+    Map<Character, Integer> map = new HashMap<>();
+    int m = pattern.length();
+    for (Character c : alphabet) {
+      map.put(c, m + 1);
+    }
+    for (int i = 0; i < m; i++) {
+      map.put(pattern.charAt(i), m - i);
     }
     return map;
   }
