@@ -1,12 +1,12 @@
 package com.chudakov.algorithms.data_structures;
 
-public class HashMap<K, V> {
+public class MyHashMap<K, V> {
   private static final int DEFAULT_SIZE = 16;
   Node<K, V>[] table;
   private int size;
 
   @SuppressWarnings("unchecked")
-  public HashMap(int size) {
+  public MyHashMap(int size) {
     if (size < 1) {
       throw new IllegalArgumentException();
     }

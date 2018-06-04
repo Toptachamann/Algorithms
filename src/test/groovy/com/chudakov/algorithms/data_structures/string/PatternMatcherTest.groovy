@@ -1,4 +1,4 @@
-package algorithm.string
+package com.chudakov.algorithms.data_structures.string
 
 import spock.lang.Specification
 import spock.lang.Unroll
