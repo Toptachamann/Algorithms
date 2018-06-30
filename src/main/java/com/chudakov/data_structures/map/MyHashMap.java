@@ -1,4 +1,4 @@
-package com.chudakov.algorithms.data_structures;
+package com.chudakov.data_structures.map;
 
 public class MyHashMap<K, V> {
   private static final int DEFAULT_SIZE = 16;

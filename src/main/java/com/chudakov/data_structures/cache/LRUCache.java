@@ -1,4 +1,4 @@
-package com.chudakov.algorithms.data_structures;
+package com.chudakov.data_structures.cache;
 
 import java.util.HashMap;
 import java.util.Map;

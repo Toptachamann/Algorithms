@@ -1,4 +1,4 @@
-package com.chudakov.algorithms.algorithm.numeric;
+package com.chudakov.algorithms.numeric;
 
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.commons.lang3.tuple.Triple;

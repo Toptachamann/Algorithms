@@ -1,4 +1,4 @@
-package com.chudakov.algorithms.algorithm.string;
+package com.chudakov.algorithms.string;
 
 import java.util.ArrayList;
 import java.util.BitSet;

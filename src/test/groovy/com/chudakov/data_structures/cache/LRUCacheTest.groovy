@@ -1,7 +1,6 @@
-package com.chudakov.algorithms.data_structures
+package com.chudakov.data_structures.cache
 
 import spock.lang.Specification
-import spock.lang.Unroll
 
 class LRUCacheTest extends Specification {
 
@@ -14,7 +13,7 @@ class LRUCacheTest extends Specification {
     cache.refer(2) == 2
   }
 
-  def "test LRU cache 2"(){
+  def "test LRU cache 2"() {
     def cache = new LRUCache(2)
     expect:
     cache.refer(1) == -1

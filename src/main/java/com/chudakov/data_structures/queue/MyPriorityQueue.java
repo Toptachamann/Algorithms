@@ -1,4 +1,4 @@
-package com.chudakov.algorithms.data_structures;
+package com.chudakov.data_structures.queue;
 
 public class MyPriorityQueue<V extends Comparable<V>> {
   private static final int DEFAULT_CAPACITY = 20;

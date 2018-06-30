@@ -1,10 +1,7 @@
-package com.chudakov.algorithms.data_structures;
+package com.chudakov.data_structures.cache;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.PriorityQueue;
 
 public class LFUCache {
   Node head;

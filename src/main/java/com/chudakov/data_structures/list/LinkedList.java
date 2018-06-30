@@ -1,4 +1,4 @@
-package com.chudakov.algorithms.data_structures;
+package com.chudakov.data_structures.list;
 
 import java.lang.reflect.Array;
 import java.util.Collection;
